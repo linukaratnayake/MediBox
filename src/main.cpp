@@ -3,6 +3,7 @@
 #include "oled.h"
 #include "buttons.h"
 #include "time_alarm.h"
+#include "temp_humidity.h"
 
 struct datetime date_time;
 struct datetime offset;
@@ -19,6 +20,8 @@ void setup()
   pinMode(PB_OK, INPUT);
   pinMode(PB_UP, INPUT);
   pinMode(PB_DOWN, INPUT);
+
+  dhtSensor.setup(DHTPIN, DHTesp::DHT22);
 
   Serial.begin(115200);
 
@@ -70,7 +73,7 @@ void loop()
     }
   }
 
-  // check_temp();
+  check_temp_humidity();
 }
 
 void run_mode(int mode)

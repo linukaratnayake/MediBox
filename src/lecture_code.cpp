@@ -1,8 +1,8 @@
-// #include <Adafruit_GFX.h>
-// #include <Adafruit_SSD1306.h>
-// #include <Wire.h>
-// #include <DHTesp.h>
-// #include <WiFi.h>
+// // #include <Adafruit_GFX.h>
+// // #include <Adafruit_SSD1306.h>
+// // #include <Wire.h>
+// // #include <DHTesp.h>
+// // #include <WiFi.h>
 
 // // #define SCREEN_WIDTH 128
 // // #define SCREEN_HEIGHT 64
@@ -19,7 +19,7 @@
 // // #define PB_OK 32
 // // #define PB_UP 33
 // // #define PB_DOWN 35
-// #define DHTPIN 12
+// // #define DHTPIN 12
 
 // // #define NTP_SERVER "pool.ntp.org"
 // // #define UTC_OFFSET 0
@@ -42,7 +42,7 @@
 
 // // declare objects
 // // Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-// DHTesp dhtSensor;
+// // DHTesp dhtSensor;
 
 // // declare global variables
 // // int days = 0;
@@ -68,7 +68,7 @@
 //     // pinMode(PB_UP, INPUT);
 //     // pinMode(PB_DOWN, INPUT);
 
-//     dhtSensor.setup(DHTPIN, DHTesp::DHT22);
+//     // dhtSensor.setup(DHTPIN, DHTesp::DHT22);
 
 //     Serial.begin(115200);
 //     if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS))
@@ -460,32 +460,32 @@
 // //     }
 // // }
 
-// void check_temp()
-// {
-//     TempAndHumidity data = dhtSensor.getTempAndHumidity();
+// // void check_temp()
+// // {
+// //     TempAndHumidity data = dhtSensor.getTempAndHumidity();
 
-//     if (data.temperature >= 32)
-//     {
-//         display.clearDisplay();
-//         print_line("TEMP HIGH", 0, 40, 1);
-//         delay(200);
-//     }
-//     else if (data.temperature <= 26)
-//     {
-//         display.clearDisplay();
-//         print_line("TEMP LOW", 0, 40, 1);
-//         delay(200);
-//     }
-//     if (data.humidity >= 80)
-//     {
-//         display.clearDisplay();
-//         print_line("HUMIDITY HIGH", 0, 50, 1);
-//         delay(200);
-//     }
-//     else if (data.humidity <= 60)
-//     {
-//         display.clearDisplay();
-//         print_line("HUMIDITY LOW", 0, 50, 1);
-//         delay(200);
-//     }
-// }
+// //     if (data.temperature >= 32)
+// //     {
+// //         display.clearDisplay();
+// //         print_line("TEMP HIGH", 0, 40, 1);
+// //         delay(200);
+// //     }
+// //     else if (data.temperature <= 26)
+// //     {
+// //         display.clearDisplay();
+// //         print_line("TEMP LOW", 0, 40, 1);
+// //         delay(200);
+// //     }
+// //     if (data.humidity >= 80)
+// //     {
+// //         display.clearDisplay();
+// //         print_line("HUMIDITY HIGH", 0, 50, 1);
+// //         delay(200);
+// //     }
+// //     else if (data.humidity <= 60)
+// //     {
+// //         display.clearDisplay();
+// //         print_line("HUMIDITY LOW", 0, 50, 1);
+// //         delay(200);
+// //     }
+// // }
