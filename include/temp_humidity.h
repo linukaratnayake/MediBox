@@ -3,6 +3,7 @@
 
 #include <DHTesp.h>
 #define DHTPIN 12
+#define LED_WARNING 2
 
 extern DHTesp dhtSensor;
 

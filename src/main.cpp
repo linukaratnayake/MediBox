@@ -15,7 +15,7 @@ void setup()
 {
   pinMode(BUZZER, OUTPUT);
   pinMode(LED_ALARM, OUTPUT);
-  // pinMode(LED_WARNING, OUTPUT);
+  pinMode(LED_WARNING, OUTPUT);
   pinMode(PB_CANCEL, INPUT);
   pinMode(PB_OK, INPUT);
   pinMode(PB_UP, INPUT);
