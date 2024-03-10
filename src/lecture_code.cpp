@@ -61,12 +61,12 @@
 
 // void setup()
 // {
-//     pinMode(BUZZER, OUTPUT);
-//     pinMode(LED_1, OUTPUT);
-//     pinMode(PB_CANCEL, INPUT);
-//     pinMode(PB_OK, INPUT);
-//     pinMode(PB_UP, INPUT);
-//     pinMode(PB_DOWN, INPUT);
+//     // pinMode(BUZZER, OUTPUT);
+//     // pinMode(LED_1, OUTPUT);
+//     // pinMode(PB_CANCEL, INPUT);
+//     // pinMode(PB_OK, INPUT);
+//     // pinMode(PB_UP, INPUT);
+//     // pinMode(PB_DOWN, INPUT);
 
 //     dhtSensor.setup(DHTPIN, DHTesp::DHT22);
 
@@ -93,10 +93,10 @@
 
 //     configTime(UTC_OFFSET, UTC_OFFSET_DST, NTP_SERVER);
 
-//     display.clearDisplay();
-//     print_line("MediBox", 10, 20, 2);
-//     delay(500);
-//     display.clearDisplay();
+//     // display.clearDisplay();
+//     // print_line("MediBox", 10, 20, 2);
+//     // delay(500);
+//     // display.clearDisplay();
 // }
 
 // void loop()

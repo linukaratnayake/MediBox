@@ -241,7 +241,7 @@ void ring_alarm()
     display.clearDisplay();
     displayLine("MEDICINE TIME!", 0, 0, 2);
 
-    digitalWrite(LED_1, HIGH);
+    digitalWrite(LED_ALARM, HIGH);
 
     bool break_happened = false;
 
@@ -262,6 +262,6 @@ void ring_alarm()
         }
     }
 
-    digitalWrite(LED_1, LOW);
+    digitalWrite(LED_ALARM, LOW);
     display.clearDisplay();
 }

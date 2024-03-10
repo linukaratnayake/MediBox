@@ -12,6 +12,14 @@ void run_mode(int);
 
 void setup()
 {
+  pinMode(BUZZER, OUTPUT);
+  pinMode(LED_ALARM, OUTPUT);
+  // pinMode(LED_WARNING, OUTPUT);
+  pinMode(PB_CANCEL, INPUT);
+  pinMode(PB_OK, INPUT);
+  pinMode(PB_UP, INPUT);
+  pinMode(PB_DOWN, INPUT);
+
   Serial.begin(115200);
 
   if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS))
@@ -21,15 +29,20 @@ void setup()
       ;
   }
 
+  display.clearDisplay();
+  displayLine("MediBox", 10, 20, 2);
+  delay(500);
+  display.clearDisplay();
+
   WiFi.begin("Wokwi-GUEST", "", 6);
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(250);
     display.clearDisplay();
-    displayLine("Connecting to Wi-Fi...", 0, 0, 2);
+    displayLine("Connecting to Wi-Fi...", 0, 0, 1);
   }
   display.clearDisplay();
-  displayLine("Connected to Wi-Fi", 0, 0, 2);
+  displayLine("Connected to Wi-Fi", 0, 0, 1);
   delay(500);
 
   // Initialize the `alarm_triggered` array to `true` in the beginning,

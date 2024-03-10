@@ -34,7 +34,6 @@ int wait_for_button_press()
             delay(200);
             return PB_OK;
         }
-        // update_time();
     }
     return PB_CANCEL;
 }

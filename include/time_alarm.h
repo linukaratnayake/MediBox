@@ -6,8 +6,8 @@
 #define NTP_SERVER "pool.ntp.org"
 #define UTC_OFFSET_DST 0
 
-#define BUZZER 5
-#define LED_1 15
+#define BUZZER 23
+#define LED_ALARM 4
 
 extern const int n_alarms;
 extern long int UTC_OFFSET; // In seconds
