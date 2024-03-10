@@ -33,11 +33,9 @@ void print_time_now(struct datetime *dt)
     displayLine(String(dt->seconds), 95, 0, 2);
 }
 
-struct datetime set_utc_offset()
+void set_utc_offset(struct datetime *offset)
 {
-    struct datetime offset;
-
-    int temp_hour = 0;
+    int temp_hour = offset->hours;
     while (true)
     {
         display.clearDisplay();
@@ -62,7 +60,7 @@ struct datetime set_utc_offset()
         else if (pressed == PB_OK)
         {
             delay(200);
-            offset.hours = temp_hour;
+            offset->hours = temp_hour;
             break;
         }
         else if (pressed == PB_CANCEL)
@@ -72,7 +70,7 @@ struct datetime set_utc_offset()
         }
     }
 
-    int temp_minute = 0;
+    int temp_minute = offset->minutes;
     while (true)
     {
         display.clearDisplay();
@@ -97,7 +95,7 @@ struct datetime set_utc_offset()
         else if (pressed == PB_OK)
         {
             delay(200);
-            offset.minutes = temp_minute;
+            offset->minutes = temp_minute;
             break;
         }
         else if (pressed == PB_CANCEL)
@@ -109,8 +107,6 @@ struct datetime set_utc_offset()
     display.clearDisplay();
     displayLine("Offset is set to " + String(temp_hour) + ":" + String(temp_minute), 0, 0, 2);
     delay(500);
-
-    return offset;
 }
 
 void update_time(struct datetime *date_time)
@@ -146,6 +142,8 @@ void set_alarm(int alarm)
         displayLine("Enter hour: " + String(temp_hour), 0, 0, 2);
 
         int pressed = wait_for_button_press();
+        time = millis(); // Refreshes time for another 5 seconds.
+
         if (pressed == PB_UP)
         {
             delay(200);
@@ -182,6 +180,8 @@ void set_alarm(int alarm)
         displayLine("Enter minute: " + String(temp_minute), 0, 0, 2);
 
         int pressed = wait_for_button_press();
+        time = millis(); // Refreshes time for another 5 seconds.
+
         if (pressed == PB_UP)
         {
             delay(200);
@@ -214,7 +214,7 @@ void set_alarm(int alarm)
     alarm_triggered[alarm] = false;
 
     display.clearDisplay();
-    displayLine("Alarm is set.", 0, 0, 2);
+    displayLine("Alarm " + String(alarm) + " is set to " + String(temp_hour) + ":" + String(temp_minute), 0, 0, 2);
     delay(500);
 }
 

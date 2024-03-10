@@ -2,7 +2,7 @@
 #include "oled.h"
 
 const int TEMP_MAX = 32;
-const int TEMP_MIN = 25;
+const int TEMP_MIN = 26;
 const int HUMD_MAX = 80;
 const int HUMD_MIN = 60;
 
@@ -16,13 +16,13 @@ void check_temp_humidity()
     if (data.temperature >= TEMP_MAX)
     {
         display.clearDisplay();
-        displayLine("TEMP HIGH", 0, 40, 1);
+        displayLine("TEMP HIGH", 10, 40, 1);
         warning = true;
     }
     else if (data.temperature <= TEMP_MIN)
     {
         display.clearDisplay();
-        displayLine("TEMP LOW", 0, 40, 1);
+        displayLine("TEMP LOW", 10, 40, 1);
         warning = true;
     }
     else
@@ -33,13 +33,13 @@ void check_temp_humidity()
     if (data.humidity >= HUMD_MAX)
     {
         display.clearDisplay();
-        displayLine("HUMIDITY HIGH", 0, 50, 1);
+        displayLine("HUMIDITY HIGH", 10, 50, 1);
         warning = true;
     }
     else if (data.humidity <= HUMD_MIN)
     {
         display.clearDisplay();
-        displayLine("HUMIDITY LOW", 0, 50, 1);
+        displayLine("HUMIDITY LOW", 10, 50, 1);
         warning = true;
     }
     else

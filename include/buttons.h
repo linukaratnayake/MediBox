@@ -4,9 +4,9 @@
 #include <Arduino.h>
 
 #define PB_CANCEL 34
-#define PB_OK 32
-#define PB_UP 33
-#define PB_DOWN 35
+#define PB_OK 5
+#define PB_UP 18
+#define PB_DOWN 19
 
 extern int current_mode;
 

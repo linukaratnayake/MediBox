@@ -10,7 +10,7 @@ int current_mode = 0;
 
 int wait_for_button_press()
 {
-    unsigned long long int time = millis();
+    unsigned long int time = millis();
 
     while (millis() - time <= 5000) // Times-out in 5 seconds.
     {
@@ -40,7 +40,9 @@ int wait_for_button_press()
 
 bool go_to_menu()
 {
-    unsigned long long int time = millis();
+    int temp_mode = current_mode;
+
+    unsigned long int time = millis();
 
     // Time-outs after 5 seconds.
     // This is important for alarms and warnings to work,
@@ -48,10 +50,10 @@ bool go_to_menu()
     while (digitalRead(PB_CANCEL) == HIGH && millis() - time <= 5000)
     {
         display.clearDisplay();
-        displayLine(modes[current_mode], 0, 0, 2);
+        displayLine(modes[temp_mode], 0, 0, 2);
 
         int pressed = wait_for_button_press();
-        int temp_mode = current_mode;
+        time = millis(); // Refreshes time for another 5 seconds.
 
         if (pressed == PB_UP)
         {

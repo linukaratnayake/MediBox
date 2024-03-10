@@ -23,7 +23,7 @@ struct datetime
 };
 
 void print_time_now(struct datetime *);
-struct datetime set_utc_offset();
+void set_utc_offset(struct datetime *);
 void update_time(struct datetime *);
 void set_alarm(int);
 void update_time_with_check_alarm(struct datetime *);

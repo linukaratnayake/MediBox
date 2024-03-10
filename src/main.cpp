@@ -6,7 +6,7 @@
 #include "temp_humidity.h"
 
 struct datetime date_time;
-struct datetime offset;
+struct datetime offset = {};
 
 // Function Declarations
 void run_mode(int);
@@ -33,7 +33,7 @@ void setup()
   }
 
   display.clearDisplay();
-  displayLine("MediBox", 10, 20, 2);
+  displayLine("MediBox", 20, 20, 2);
   delay(500);
   display.clearDisplay();
 
@@ -80,7 +80,7 @@ void run_mode(int mode)
 {
   if (mode == 0)
   {
-    offset = set_utc_offset();
+    set_utc_offset(&offset);
     UTC_OFFSET = 3600 * offset.hours + 60 * offset.minutes;
     configTime(UTC_OFFSET, UTC_OFFSET_DST, NTP_SERVER);
   }
