@@ -8,6 +8,11 @@
 extern WiFiClient espClient;
 extern PubSubClient mqttClient;
 
+extern int subscribedAngleOffset;
+extern bool subscribedAngleOffsetChanged;
+extern float subscribedGammaFactor;
+extern bool subscribedGammaFactorChanged;
+
 void setupMQTT();
 void connectToBroker();
 void recieveCallback(char *, byte *, unsigned int);

@@ -90,6 +90,14 @@ void loop()
 
   check_temp_humidity();
 
+  if (subscribedAngleOffsetChanged) {
+    angleOffset = subscribedAngleOffset;
+    subscribedAngleOffsetChanged = false;
+  }
+  if (subscribedGammaFactorChanged) {
+    gammaFactor = subscribedGammaFactor;
+    subscribedGammaFactorChanged = false;
+  }
   slideWindow(angleOffset, gammaFactor);
 
   // Communication with the NodeRED Dashboard

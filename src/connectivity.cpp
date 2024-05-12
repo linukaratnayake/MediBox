@@ -3,6 +3,11 @@
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
 
+int subscribedAngleOffset;
+bool subscribedAngleOffsetChanged = false;
+float subscribedGammaFactor;
+bool subscribedGammaFactorChanged = false;
+
 void setupMQTT()
 {
     mqttClient.setServer("test.mosquitto.org", 1883);
@@ -17,10 +22,8 @@ void connectToBroker()
         if (mqttClient.connect("ESP32Client-68435039325930567"))
         {
             Serial.println("MQTT Connected");
-            mqttClient.subscribe("ENTC-ON-OFF_NI");
-            mqttClient.subscribe("ENTC-ADMIN-SCH-ON_NI");
-            mqttClient.subscribe("SERVO-ADJUSTMENTS_MINA");
-            mqttClient.subscribe("SERVO-ADJUSTMENTS_CF");
+            mqttClient.subscribe("2853_MEDIBOX_ANGLE");
+            mqttClient.subscribe("2853_MEDIBOX_FACTOR");
         }
         else
         {
@@ -36,44 +39,48 @@ void recieveCallback(char *topic, byte *payload, unsigned int length)
     Serial.print("Message arrived [");
     Serial.print(topic);
     Serial.print("] ");
-    char payloadCharAr[length];
+    char payloadCharArr[length];
     Serial.print("Message Received: ");
 
     for (int i = 0; i < length; i++)
     {
         Serial.print((char)payload[i]);
-        payloadCharAr[i] = (char)payload[i];
+        payloadCharArr[i] = (char)payload[i];
     }
     Serial.println();
 
-    if (strcmp(topic, "ENTC-ON-OFF_NI") == 0)
+    if (strcmp(topic, "2853_MEDIBOX_ANGLE") == 0)
     {
-        
+        subscribedAngleOffset = atoi(payloadCharArr);
+        subscribedAngleOffsetChanged = true;
     }
-    else if (strcmp(topic, "ENTC-ADMIN-SCH-ON_NI") == 0)
+    else if (strcmp(topic, "2853_MEDIBOX_FACTOR") == 0)
     {
-
+        subscribedGammaFactor = atoi(payloadCharArr);
+        subscribedGammaFactorChanged = true;
     }
     else if (strcmp(topic, "SERVO-ADJUSTMENTS_MINA") == 0)
     {
-
     }
     else if (strcmp(topic, "SERVO-ADJUSTMENTS_CF") == 0)
     {
-
     }
 }
 
-void mqtt_publish(char *topic, float value) {
-  if ((int) value == value) {
-    const int length = String(int(value)).length();
-    char valueArr[length + 1];
-    String(int(value)).toCharArray(valueArr, length + 1);
-    mqttClient.publish(topic, valueArr);
-  } else {
-    const int length = String(value).length();
-    char valueArr[length + 1];
-    String(value).toCharArray(valueArr, length + 1);
-    mqttClient.publish(topic, valueArr);
-  }
+void mqtt_publish(char *topic, float value)
+{
+    if ((int)value == value)
+    {
+        const int length = String(int(value)).length();
+        char valueArr[length + 1];
+        String(int(value)).toCharArray(valueArr, length + 1);
+        mqttClient.publish(topic, valueArr);
+    }
+    else
+    {
+        const int length = String(value).length();
+        char valueArr[length + 1];
+        String(value).toCharArray(valueArr, length + 1);
+        mqttClient.publish(topic, valueArr);
+    }
 }
