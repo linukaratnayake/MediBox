@@ -4,6 +4,8 @@
 #include "buttons.h"
 #include "time_alarm.h"
 #include "temp_humidity.h"
+#include "ldr.h"
+#include "servomotor.h"
 
 struct datetime date_time;
 struct datetime offset = {};
@@ -20,8 +22,12 @@ void setup()
   pinMode(PB_OK, INPUT);
   pinMode(PB_UP, INPUT);
   pinMode(PB_DOWN, INPUT);
+  pinMode(LDR_LEFT, INPUT);
+  pinMode(LDR_RIGHT, INPUT);
+  pinMode(SERVO_PIN, OUTPUT);
 
   dhtSensor.setup(DHTPIN, DHTesp::DHT22);
+  servoInitialize();
 
   Serial.begin(115200);
 
@@ -61,6 +67,20 @@ void setup()
 
 void loop()
 {
+  while(true) {
+    // Serial.print(getIntensity(LDR_LEFT));
+    // Serial.print("\t");
+    // Serial.println(getIntensity(LDR_RIGHT));
+
+    for (int i = 10; i < 100; i++) {
+      turnServo(i);
+    }
+
+    for (int i = 80; i > 0; i--) {
+      turnServo(i);
+    }
+  }
+
   update_time_with_check_alarm(&date_time);
 
   if (digitalRead(PB_OK) == LOW)
