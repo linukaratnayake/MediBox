@@ -9,5 +9,6 @@ extern Servo servo;
 
 void servoInitialize();
 void turnServo(int);
+int getCurrentAngle();
 
 #endif

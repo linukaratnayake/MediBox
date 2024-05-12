@@ -11,3 +11,7 @@ void servoInitialize() {
 void turnServo(int angle) {
     servo.write(angle);
 }
+
+int getCurrentAngle() {
+    return servo.read();
+}

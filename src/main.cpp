@@ -10,8 +10,13 @@
 struct datetime date_time;
 struct datetime offset = {};
 
+int angleOffset = 30;
+float gammaFactor = 0.75;
+
 // Function Declarations
 void run_mode(int);
+int calculateServoAngle(int, int, int, float);
+void slideWindow(int, float);
 
 void setup()
 {
@@ -67,20 +72,6 @@ void setup()
 
 void loop()
 {
-  while(true) {
-    // Serial.print(getIntensity(LDR_LEFT));
-    // Serial.print("\t");
-    // Serial.println(getIntensity(LDR_RIGHT));
-
-    for (int i = 10; i < 100; i++) {
-      turnServo(i);
-    }
-
-    for (int i = 80; i > 0; i--) {
-      turnServo(i);
-    }
-  }
-
   update_time_with_check_alarm(&date_time);
 
   if (digitalRead(PB_OK) == LOW)
@@ -94,6 +85,8 @@ void loop()
   }
 
   check_temp_humidity();
+
+  slideWindow(angleOffset, gammaFactor);
 }
 
 void run_mode(int mode)
@@ -117,4 +110,45 @@ void run_mode(int mode)
     displayLine("All alarms are disabled.", 0, 0, 2);
     delay(500);
   }
+}
+
+int calculateServoAngle(int leftLDR, int rightLDR, int offset, float gamma) {
+  float D;
+  if (leftLDR >= rightLDR) D = 1.5;
+  else D = 0.5;
+
+  float maxValue = 4063.0;
+  float I = max(leftLDR, rightLDR) / maxValue;
+
+  int angle = min(offset * D + (180 - offset) * I * gamma, (float) 180);
+
+  return angle;
+}
+
+void slideWindow(int offset, float gamma) {
+  int leftValue = getIntensity(LDR_LEFT);
+  int rightValue = getIntensity(LDR_RIGHT);
+
+  int angle = calculateServoAngle(leftValue, rightValue, offset, gamma);
+
+  turnServo(angle);
+
+  // The following part shows jitter in the simulation.
+
+  // // Turn servo motor slowly.
+  // int currentAngle = max(min(getCurrentAngle(), 180), 0);
+  // Serial.print("Current Angle: ");
+  // Serial.println(currentAngle);
+
+  // if (angle > currentAngle) {
+  //   for (int i = currentAngle; i <= angle; i++) {
+  //     turnServo(i);
+  //     delay(10);
+  //   }
+  // } else if (angle < currentAngle) {
+  //   for (int i = currentAngle; i >= angle; i--) {
+  //     turnServo(i);
+  //     delay(10);
+  //   }
+  // }
 }
