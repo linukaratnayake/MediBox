@@ -1,5 +1,6 @@
 #include "temp_humidity.h"
 #include "oled.h"
+#include "connectivity.h"
 
 const int TEMP_MAX = 32;
 const int TEMP_MIN = 26;
@@ -55,6 +56,10 @@ void check_temp_humidity()
     {
         digitalWrite(LED_WARNING, LOW);
     }
+
+    // Publishing temperature and humidity to the broker.
+    mqtt_publish("2853_MEDIBOX_TEMP", data.temperature);
+    mqtt_publish("2853_MEDIBOX_HUMIDITY", data.humidity);
 
     delay(200);
 }

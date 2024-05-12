@@ -11,5 +11,6 @@ extern PubSubClient mqttClient;
 void setupMQTT();
 void connectToBroker();
 void recieveCallback(char *, byte *, unsigned int);
+void mqtt_publish(char *, float);
 
 #endif

@@ -63,3 +63,17 @@ void recieveCallback(char *topic, byte *payload, unsigned int length)
 
     }
 }
+
+void mqtt_publish(char *topic, float value) {
+  if ((int) value == value) {
+    const int length = String(int(value)).length();
+    char valueArr[length + 1];
+    String(int(value)).toCharArray(valueArr, length + 1);
+    mqttClient.publish(topic, valueArr);
+  } else {
+    const int length = String(value).length();
+    char valueArr[length + 1];
+    String(value).toCharArray(valueArr, length + 1);
+    mqttClient.publish(topic, valueArr);
+  }
+}

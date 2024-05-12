@@ -18,7 +18,6 @@ float gammaFactor = 0.75;
 void run_mode(int);
 int calculateServoAngle(int, int, int, float);
 void slideWindow(int, float);
-void mqtt_publish(char *, float);
 
 void setup()
 {
@@ -168,18 +167,4 @@ void slideWindow(int offset, float gamma) {
   //     delay(10);
   //   }
   // }
-}
-
-void mqtt_publish(char *topic, float value) {
-  if ((int) value == value) {
-    const int length = String(int(value)).length();
-    char valueArr[length + 1];
-    String(int(value)).toCharArray(valueArr, length);
-    mqttClient.publish(topic, valueArr);
-  } else {
-    const int length = String(value).length();
-    char valueArr[length + 1];
-    String(value).toCharArray(valueArr, length);
-    mqttClient.publish(topic, valueArr);
-  }
 }
