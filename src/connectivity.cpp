@@ -24,6 +24,7 @@ void connectToBroker()
             Serial.println("MQTT Connected");
             mqttClient.subscribe("2853_MEDIBOX_ANGLE");
             mqttClient.subscribe("2853_MEDIBOX_FACTOR");
+            mqttClient.subscribe("2853_MEDIBOX_ALARM");
         }
         else
         {
@@ -59,11 +60,10 @@ void recieveCallback(char *topic, byte *payload, unsigned int length)
         subscribedGammaFactor = atoi(payloadCharArr);
         subscribedGammaFactorChanged = true;
     }
-    else if (strcmp(topic, "SERVO-ADJUSTMENTS_MINA") == 0)
+    else if (strcmp(topic, "2853_MEDIBOX_ALARM") == 0)
     {
-    }
-    else if (strcmp(topic, "SERVO-ADJUSTMENTS_CF") == 0)
-    {
+        // Received data should be handled appropriately.
+        // Detect which alarm, and assign it.
     }
 }
 
