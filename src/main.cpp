@@ -6,6 +6,7 @@
 #include "temp_humidity.h"
 #include "ldr.h"
 #include "servomotor.h"
+#include "connectivity.h"
 
 struct datetime date_time;
 struct datetime offset = {};
@@ -59,6 +60,9 @@ void setup()
   displayLine("Connected to Wi-Fi", 0, 0, 1);
   delay(500);
 
+  // Setting up MQTT Connection
+  setupMQTT();
+
   // Initialize the `alarm_triggered` array to `true` in the beginning,
   // so that alarms will not trigger at unwanted times.
   for (int i = 0; i < n_alarms; i++)
@@ -87,6 +91,22 @@ void loop()
   check_temp_humidity();
 
   slideWindow(angleOffset, gammaFactor);
+
+  // Communication with the NodeRED Dashboard
+
+  if (!mqttClient.connected()) {
+    Serial.println("Reconnecting to MQTT Broker...");
+    connectToBroker();
+  }
+
+  mqttClient.loop();
+
+  char leftValue[5];
+  String(getIntensity(LDR_LEFT)).toCharArray(leftValue, 5);
+  char rightValue[5];
+  String(getIntensity(LDR_RIGHT)).toCharArray(rightValue, 5);
+  mqttClient.publish("2853_MEDIBOX_LDR_LEFT", leftValue);
+  mqttClient.publish("2853_MEDIBOX_LDR_RIGHT", rightValue);
 }
 
 void run_mode(int mode)
