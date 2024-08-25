@@ -1,4 +1,4 @@
-# Medibox Project
+# Smart Medibox
 
 ## Overview
 
@@ -57,7 +57,7 @@ The Medibox is a smart, IoT-enabled device designed to help users manage their m
 ### Prerequisites
 
 - ESP32 microcontroller
-- Sensors: Temperature, Humidity, LDRs
+- Sensors: Temperature & Humidity (DHT22), LDRs
 - Actuators: Servo Motor, Buzzer, Push Button, LEDs
 - OLED display
 - Wi-Fi connection for NTP time synchronization
