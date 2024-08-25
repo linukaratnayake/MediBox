@@ -1,0 +1,1161 @@
+[
+    {
+        "id": "993c90b535398c12",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f193dce51d74b790",
+        "type": "mqtt in",
+        "z": "993c90b535398c12",
+        "name": "",
+        "topic": "2853_MEDIBOX_LDR_LEFT",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1bf594fee96d43b8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "1c6609feefef8f92"
+            ]
+        ]
+    },
+    {
+        "id": "98b747cda6a343ca",
+        "type": "mqtt in",
+        "z": "993c90b535398c12",
+        "name": "",
+        "topic": "2853_MEDIBOX_LDR_RIGHT",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1bf594fee96d43b8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "15487b74e483050a"
+            ]
+        ]
+    },
+    {
+        "id": "d5c87e15eb69625e",
+        "type": "function",
+        "z": "993c90b535398c12",
+        "name": "function 1",
+        "func": "if (flow.get(\"leftLDR\") >= flow.get(\"rightLDR\")) {\n    return { payload: flow.get(\"leftLDR\") };\n} else if (flow.get(\"leftLDR\") < flow.get(\"rightLDR\")) {\n    return { payload: flow.get(\"rightLDR\")};\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 320,
+        "wires": [
+            [
+                "dc03b57ddb2524ce",
+                "71ef51aa97b99004"
+            ]
+        ]
+    },
+    {
+        "id": "6801d26bd94f1299",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "leftLDR",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c989aca0f8cc3614",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rightLDR",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dc03b57ddb2524ce",
+        "type": "ui_gauge",
+        "z": "993c90b535398c12",
+        "name": "",
+        "group": "831380e05e25856d",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Maximum Light Intensity",
+        "label": "",
+        "format": "{{payload}}",
+        "min": 0,
+        "max": "1",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "71ef51aa97b99004",
+        "type": "ui_chart",
+        "z": "993c90b535398c12",
+        "name": "",
+        "group": "831380e05e25856d",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Intensity Variation",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "cubic",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 730,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c796af7ff0dcae6e",
+        "type": "ui_slider",
+        "z": "993c90b535398c12",
+        "name": "",
+        "label": "Minimum Angle",
+        "tooltip": "",
+        "group": "7399d73c9fc5fa4e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "120",
+        "step": 1,
+        "className": "",
+        "x": 120,
+        "y": 440,
+        "wires": [
+            [
+                "27c5ecb55fbac38c"
+            ]
+        ]
+    },
+    {
+        "id": "14a7181d596d4274",
+        "type": "ui_slider",
+        "z": "993c90b535398c12",
+        "name": "",
+        "label": "Controlling Factor",
+        "tooltip": "",
+        "group": "7399d73c9fc5fa4e",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "1",
+        "step": "0.01",
+        "className": "",
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "2d91f2d44e4dcfe7"
+            ]
+        ]
+    },
+    {
+        "id": "1a1cb0ddf23e9f9b",
+        "type": "mqtt out",
+        "z": "993c90b535398c12",
+        "name": "",
+        "topic": "2853_MEDIBOX_ANGLE",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1bf594fee96d43b8",
+        "x": 810,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "873368722ae96764",
+        "type": "mqtt out",
+        "z": "993c90b535398c12",
+        "name": "",
+        "topic": "2853_MEDIBOX_FACTOR",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1bf594fee96d43b8",
+        "x": 820,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "1c6609feefef8f92",
+        "type": "function",
+        "z": "993c90b535398c12",
+        "name": "Map to 0 - 1 Range",
+        "func": "let valueMapped = msg.payload / (4063.0);\nreturn {\n    topic: \"LEFT\",\n    payload: valueMapped.toFixed(2)\n    };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 160,
+        "wires": [
+            [
+                "6801d26bd94f1299",
+                "094a41e421e5b15f"
+            ]
+        ]
+    },
+    {
+        "id": "15487b74e483050a",
+        "type": "function",
+        "z": "993c90b535398c12",
+        "name": "Map to 0 - 1 Range",
+        "func": "let valueMapped = msg.payload / (4063.0);\nreturn {\n    topic: \"RIGHT\",\n    payload: valueMapped.toFixed(2)\n    };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "c989aca0f8cc3614",
+                "094a41e421e5b15f"
+            ]
+        ]
+    },
+    {
+        "id": "c5a92169bd45a05a",
+        "type": "ui_dropdown",
+        "z": "993c90b535398c12",
+        "name": "",
+        "label": "Medicine Type",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "7399d73c9fc5fa4e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Type 1",
+                "value": "Type 1",
+                "type": "str"
+            },
+            {
+                "label": "Type 2",
+                "value": "Type 2",
+                "type": "str"
+            },
+            {
+                "label": "Type 3",
+                "value": "Type 3",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 120,
+        "y": 560,
+        "wires": [
+            [
+                "783ccdee78dcbaf2"
+            ]
+        ]
+    },
+    {
+        "id": "783ccdee78dcbaf2",
+        "type": "function",
+        "z": "993c90b535398c12",
+        "name": "Set Pre-defined Values",
+        "func": "if (msg.payload == \"Type 1\") {\n    flow.set(\"minAngle\", 50);\n    flow.set(\"factor\", 0.60);\n} else if (msg.payload == \"Type 2\") {\n    flow.set(\"minAngle\", 90);\n    flow.set(\"factor\", 0.80);\n} else if (msg.payload == \"Type 3\") {\n    flow.set(\"minAngle\", 100);\n    flow.set(\"factor\", 0.40);\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "27c5ecb55fbac38c",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "minAngle",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d91f2d44e4dcfe7",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "factor",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bf3c9dec1b3dc67e",
+        "type": "complete",
+        "z": "993c90b535398c12",
+        "name": "Sliding Window Values Acquired.",
+        "scope": [
+            "783ccdee78dcbaf2",
+            "27c5ecb55fbac38c",
+            "2d91f2d44e4dcfe7"
+        ],
+        "uncaught": false,
+        "x": 230,
+        "y": 660,
+        "wires": [
+            [
+                "1aa8ea4e4f42ecaa",
+                "b11923e6540d72ed"
+            ]
+        ]
+    },
+    {
+        "id": "1aa8ea4e4f42ecaa",
+        "type": "function",
+        "z": "993c90b535398c12",
+        "name": "Return Minimum Angle",
+        "func": "return { payload: flow.get(\"minAngle\") };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 640,
+        "wires": [
+            [
+                "1a1cb0ddf23e9f9b"
+            ]
+        ]
+    },
+    {
+        "id": "b11923e6540d72ed",
+        "type": "function",
+        "z": "993c90b535398c12",
+        "name": "Return Controlling Factor",
+        "func": "return { payload: flow.get(\"factor\") };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 680,
+        "wires": [
+            [
+                "873368722ae96764"
+            ]
+        ]
+    },
+    {
+        "id": "d840f2bb44a7f702",
+        "type": "complete",
+        "z": "993c90b535398c12",
+        "name": "LDR Values Acquired.",
+        "scope": [
+            "6801d26bd94f1299",
+            "c989aca0f8cc3614"
+        ],
+        "uncaught": false,
+        "x": 280,
+        "y": 320,
+        "wires": [
+            [
+                "d5c87e15eb69625e"
+            ]
+        ]
+    },
+    {
+        "id": "4dbf6b29fb836a64",
+        "type": "mqtt in",
+        "z": "993c90b535398c12",
+        "name": "",
+        "topic": "2853_MEDIBOX_TEMP",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1bf594fee96d43b8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 780,
+        "wires": [
+            [
+                "010767f22a039408"
+            ]
+        ]
+    },
+    {
+        "id": "6959724793fce288",
+        "type": "mqtt in",
+        "z": "993c90b535398c12",
+        "name": "",
+        "topic": "2853_MEDIBOX_HUMIDITY",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1bf594fee96d43b8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 840,
+        "wires": [
+            [
+                "b6c49e6e2a3217c4"
+            ]
+        ]
+    },
+    {
+        "id": "010767f22a039408",
+        "type": "ui_gauge",
+        "z": "993c90b535398c12",
+        "name": "",
+        "group": "c3f4f0f7ae7bb7e2",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "",
+        "format": "{{payload}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#ca3838",
+            "#12d929",
+            "#ca3838"
+        ],
+        "seg1": "26",
+        "seg2": "32",
+        "diff": false,
+        "className": "",
+        "x": 510,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "b6c49e6e2a3217c4",
+        "type": "ui_gauge",
+        "z": "993c90b535398c12",
+        "name": "",
+        "group": "c3f4f0f7ae7bb7e2",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{payload}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 500,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "094a41e421e5b15f",
+        "type": "ui_chart",
+        "z": "993c90b535398c12",
+        "name": "",
+        "group": "831380e05e25856d",
+        "order": 1,
+        "width": 6,
+        "height": 3,
+        "label": "LDR Readings",
+        "chartType": "bar",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 880,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d8f8418ed678a955",
+        "type": "ui_text_input",
+        "z": "993c90b535398c12",
+        "name": "",
+        "label": "Date",
+        "tooltip": "",
+        "group": "c90a5f3ad68d2145",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "datetime-local",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 150,
+        "y": 1080,
+        "wires": [
+            [
+                "7ffcb4d23c5d9f9c"
+            ]
+        ]
+    },
+    {
+        "id": "81271ecdcf5066b4",
+        "type": "ui_switch",
+        "z": "993c90b535398c12",
+        "name": "",
+        "label": "Alarm 1",
+        "tooltip": "",
+        "group": "c90a5f3ad68d2145",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 160,
+        "y": 1020,
+        "wires": [
+            [
+                "840c65391c0afa52"
+            ]
+        ]
+    },
+    {
+        "id": "8ea0d984a0cd537e",
+        "type": "ui_text_input",
+        "z": "993c90b535398c12",
+        "name": "",
+        "label": "Date",
+        "tooltip": "",
+        "group": "c90a5f3ad68d2145",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "datetime-local",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 150,
+        "y": 1240,
+        "wires": [
+            [
+                "e3c6942a09fb54c5"
+            ]
+        ]
+    },
+    {
+        "id": "6d498f310ba7445a",
+        "type": "ui_switch",
+        "z": "993c90b535398c12",
+        "name": "",
+        "label": "Alarm 2",
+        "tooltip": "",
+        "group": "c90a5f3ad68d2145",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 160,
+        "y": 1180,
+        "wires": [
+            [
+                "025d6e1954b4794e"
+            ]
+        ]
+    },
+    {
+        "id": "ecf3644ba80e2936",
+        "type": "ui_text_input",
+        "z": "993c90b535398c12",
+        "name": "",
+        "label": "Date",
+        "tooltip": "",
+        "group": "c90a5f3ad68d2145",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "datetime-local",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 150,
+        "y": 1400,
+        "wires": [
+            [
+                "09656447534402e1"
+            ]
+        ]
+    },
+    {
+        "id": "b526a4c271a98826",
+        "type": "ui_switch",
+        "z": "993c90b535398c12",
+        "name": "",
+        "label": "Alarm 3",
+        "tooltip": "",
+        "group": "c90a5f3ad68d2145",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 160,
+        "y": 1340,
+        "wires": [
+            [
+                "31fd639e90cc8dc2"
+            ]
+        ]
+    },
+    {
+        "id": "094a5849a01701c1",
+        "type": "function",
+        "z": "993c90b535398c12",
+        "name": "Alarm 1",
+        "func": "if (flow.get(\"alarm1\") == true) {\n    return {payload: {\n        alarm: 1,\n        value: flow.get(\"alarm1_datetime\")\n    }};\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 1040,
+        "wires": [
+            [
+                "1c61b4cfb6061e6f"
+            ]
+        ]
+    },
+    {
+        "id": "840c65391c0afa52",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 1020,
+        "wires": [
+            [
+                "094a5849a01701c1"
+            ]
+        ]
+    },
+    {
+        "id": "7ffcb4d23c5d9f9c",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm1_datetime",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1080,
+        "wires": [
+            [
+                "094a5849a01701c1"
+            ]
+        ]
+    },
+    {
+        "id": "025d6e1954b4794e",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 1180,
+        "wires": [
+            [
+                "e209aa7eaf10eafe"
+            ]
+        ]
+    },
+    {
+        "id": "e3c6942a09fb54c5",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm2_datetime",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1240,
+        "wires": [
+            [
+                "e209aa7eaf10eafe"
+            ]
+        ]
+    },
+    {
+        "id": "31fd639e90cc8dc2",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm3",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 1340,
+        "wires": [
+            [
+                "06f5a363e29050b3"
+            ]
+        ]
+    },
+    {
+        "id": "09656447534402e1",
+        "type": "change",
+        "z": "993c90b535398c12",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm3_datetime",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1400,
+        "wires": [
+            [
+                "06f5a363e29050b3"
+            ]
+        ]
+    },
+    {
+        "id": "e209aa7eaf10eafe",
+        "type": "function",
+        "z": "993c90b535398c12",
+        "name": "Alarm 2",
+        "func": "if (flow.get(\"alarm2\") == true) {\n    return {payload:{\n        alarm: 2,\n        value: flow.get(\"alarm2_datetime\")\n    }};\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 1200,
+        "wires": [
+            [
+                "1c61b4cfb6061e6f"
+            ]
+        ]
+    },
+    {
+        "id": "06f5a363e29050b3",
+        "type": "function",
+        "z": "993c90b535398c12",
+        "name": "Alarm 3",
+        "func": "if (flow.get(\"alarm3\") == true) {\n    return {payload: {\n        alarm: 3,\n        value: flow.get(\"alarm3_datetime\")\n    }};\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 1360,
+        "wires": [
+            [
+                "1c61b4cfb6061e6f"
+            ]
+        ]
+    },
+    {
+        "id": "1c61b4cfb6061e6f",
+        "type": "mqtt out",
+        "z": "993c90b535398c12",
+        "name": "",
+        "topic": "2853_MEDIBOX_ALARM",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1bf594fee96d43b8",
+        "x": 890,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "1bf594fee96d43b8",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "831380e05e25856d",
+        "type": "ui_group",
+        "name": "Light Intensity",
+        "tab": "1d9ede086fce61c6",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7399d73c9fc5fa4e",
+        "type": "ui_group",
+        "name": "Sliding Window",
+        "tab": "1d9ede086fce61c6",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c3f4f0f7ae7bb7e2",
+        "type": "ui_group",
+        "name": "Temperature and Humidity",
+        "tab": "1d9ede086fce61c6",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c90a5f3ad68d2145",
+        "type": "ui_group",
+        "name": "Schedule Alarms",
+        "tab": "1d9ede086fce61c6",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1d9ede086fce61c6",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

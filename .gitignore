@@ -4,3 +4,4 @@ ESP32_Code/.vscode/c_cpp_properties.json
 ESP32_Code/.vscode/launch.json
 ESP32_Code/.vscode/ipch
 ESP32_Code/src/lecture_code.cpp
+.DS_Store
