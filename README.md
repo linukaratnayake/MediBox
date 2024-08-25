@@ -22,8 +22,8 @@ The Medibox is a smart, IoT-enabled device designed to help users manage their m
 4. **Environmental Monitoring:**
    - Monitor temperature and humidity levels using sensors.
    - Display warnings when temperature or humidity exceeds healthy limits.
-     - Healthy Temperature: 26°C ≤ Temperature ≤ 32°C
-     - Healthy Humidity: 60% ≤ Humidity ≤ 80%
+     - Healthy Temperature: $26^{\circ}C$ ≤ Temperature ≤ $32^{\circ}C$
+     - Healthy Humidity: $60$% ≤ Humidity ≤ $80$%
 
 5. **Light Intensity Monitoring:**
    - Measure light intensity using two Light Dependent Resistors (LDRs) placed on either side of the Medibox.
@@ -33,9 +33,9 @@ The Medibox is a smart, IoT-enabled device designed to help users manage their m
 6. **Automatic Light Regulation:**
    - Adjust the angle of a shaded sliding window using a servo motor to regulate light intensity entering the Medibox.
    - Implement the following equation to control the servo angle:
-     $$
-     \theta = \min\{\theta_{\text{offset}} \times D + (180^{\circ} - \theta_{\text{offset}}) \times I \times \gamma, 180^{\circ}\}
-     $$
+     
+     $$\theta = \min({\theta_{\text{offset}} \times D + (180^{\circ} - \theta_{\text{offset}}) \times I \times \gamma, 180^{\circ}})$$
+     
      - $\theta$ is the motor angle.
      - $\theta_{\text{offset}}$ is the minimum angle (default value: 30 degrees).
      - $I$ is the maximum light intensity (range: 0 to 1).
